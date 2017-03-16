@@ -113,35 +113,28 @@
 }
 
 #pragma mark - UITableViewDataSource
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == self.leftTableView) {
-        return self.firstData.count ? self.firstData.count : 0;
+        if (self.firstData.count) {
+            return self.firstData.count ? self.firstData.count : 0;
+        }
+        return 0;
     }else if (tableView == self.midTableView) {
-        NSInteger index = [self.IndexPathArray[0] integerValue];
-//        NSLog(@"%ld",index);
-//        if (index >= self.secondeData.count) {
-//            index = self.secondeData.count-1;
-//        }
-        NSArray *array = self.secondeData[index];
+        if (self.secondeData.count) {
+            NSInteger index = [self.IndexPathArray[0] integerValue];
+            NSArray *array = self.secondeData[index];
+            return array.count ? array.count : 0;
+        }
+        return 0;
         
-        return array.count ? array.count : 0;
     }else {
-        
-        NSInteger index = [self.IndexPathArray[0] integerValue];
-        NSInteger index1 = [self.IndexPathArray[1] integerValue];
-//        if (index >= self.thirdData.count) {
-//            index = self.thirdData.count-1;
-//        }
-//        NSArray *a = self.thirdData[index];
-//        if (index1 >= a.count) {
-//            index1 = a.count-1;
-//        }
-//        NSLog(@"%ld",index1);
-
-        NSArray *array = self.thirdData[index][index1];
-        
-        return array.count ? array.count : 0;
+        if (self.thirdData.count) {
+            NSInteger index = [self.IndexPathArray[0] integerValue];
+            NSInteger index1 = [self.IndexPathArray[1] integerValue];
+            NSArray *array = self.thirdData[index][index1];
+            return array.count ? array.count : 0;
+        }
+        return 0;
     }
 }
 
